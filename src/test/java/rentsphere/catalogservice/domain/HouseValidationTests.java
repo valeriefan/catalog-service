@@ -24,7 +24,7 @@ public class HouseValidationTests {
     @Test
     void whenAllFieldsCorrectThenValidationSucceeds() {
         var house =
-                new House("123456789", "Acme Fresh Start Housing",
+                House.of("123456789", "Acme Fresh Start Housing",
                         "Chicago",
                         "IL",
                         "https://angular.dev/assets/images/tutorials/common/b" +
@@ -40,7 +40,7 @@ public class HouseValidationTests {
     @Test
     void whenCodeNotDefinedThenValidationFails() {
         var house =
-                new House("", "Acme Fresh Start Housing",
+                House.of("", "Acme Fresh Start Housing",
                         "Chicago",
                         "IL",
                         "https://angular.dev/assets/images/tutorials/common/b" +
@@ -61,7 +61,7 @@ public class HouseValidationTests {
     @Test
     void whenCodeDefinedButIncorrectThenValidationFails() {
         var house =
-                new House("1111", "Acme Fresh Start Housing",
+                House.of("1111", "Acme Fresh Start Housing",
                         "Chicago",
                         "IL",
                         "https://angular.dev/assets/images/tutorials/common/be" +
@@ -79,7 +79,7 @@ public class HouseValidationTests {
     @Test
     void whenNameIsNotDefinedThenValidationFails() {
         var house =
-                new House("123456789", "",
+                House.of("123456789", "",
                         "Chicago",
                         "IL",
                         "https://angular.dev/assets/images/tutorials/common/berna" +
@@ -97,7 +97,7 @@ public class HouseValidationTests {
     @Test
     void whenCityIsNotDefinedThenValidationFails() {
         var house =
-                new House("123456789", "Acme Fresh Start Housing",
+                House.of("123456789", "Acme Fresh Start Housing",
                         "",
                         "IL",
                         "https://angular.dev/assets/images/tutorials/common/" +
@@ -115,7 +115,7 @@ public class HouseValidationTests {
     @Test
     void whenStateIsNotDefinedThenValidationFails() {
         var house =
-                new House("123456789", "Acme Fresh Start Housing",
+                House.of("123456789", "Acme Fresh Start Housing",
                         "Chicago",
                         "",
                         "https://angular.dev/assets/images/tutorials/" +
@@ -133,7 +133,7 @@ public class HouseValidationTests {
     @Test
     void whenPhotoIsNotDefinedThenValidationFails() {
         var house =
-                new House("123456789", "Acme Fresh Start Housing",
+                House.of("123456789", "Acme Fresh Start Housing",
                         "Chicago",
                         "IL",
                         "",
@@ -150,7 +150,7 @@ public class HouseValidationTests {
     @Test
     void whenAvailableUnitsIsNotDefinedThenValidationFails() {
         var house =
-                new House("123456789", "Acme Fresh Start Housing",
+                House.of("123456789", "Acme Fresh Start Housing",
                         "Chicago",
                         "IL",
                         "https://angular.dev/assets/images/tutorials" +

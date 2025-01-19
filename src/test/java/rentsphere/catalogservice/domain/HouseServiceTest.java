@@ -23,7 +23,7 @@ public class HouseServiceTest {
     @Test
     void whenBookToCreateAlreadyExistsThenThrows() {
         var code = "123456789";
-        var houseToCreate = new House(code, "Acme Fresh Start Housing",
+        var houseToCreate = House.of(code, "Acme Fresh Start Housing",
                 "Chicago",
                 "IL",
                 "https://angular.dev/assets/images/tutorials/common/b" +

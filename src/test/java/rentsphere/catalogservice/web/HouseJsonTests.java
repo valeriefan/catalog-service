@@ -16,7 +16,7 @@ public class HouseJsonTests {
 
     @Test
     void testSerialize() throws Exception {
-        var house = new House("123456789", "Acme Fresh Start Housing",
+        var house = House.of("123456789", "Acme Fresh Start Housing",
                 "Chicago",
                 "IL",
                 "https://angular.dev/assets/images/tutorials/common/b" +
@@ -26,8 +26,8 @@ public class HouseJsonTests {
                 true
         );
         var jsonContent = json.write(house);
-        assertThat(jsonContent).extractingJsonPathStringValue("@.houseCode")
-                .isEqualTo(house.houseCode());
+        assertThat(jsonContent).extractingJsonPathStringValue("@.code")
+                .isEqualTo(house.code());
         assertThat(jsonContent).extractingJsonPathStringValue("@.name")
                 .isEqualTo(house.name());
         assertThat(jsonContent).extractingJsonPathStringValue("@.city")
@@ -48,7 +48,7 @@ public class HouseJsonTests {
     void testDeserialize() throws Exception {
         var content = """
                 {
-                    "houseCode": "123456789",
+                    "code": "123456789",
                 	"name": "Acme Fresh Start Housing",\s
                     "city": "Chicago",\s
                     "state": "IL",
@@ -60,7 +60,7 @@ public class HouseJsonTests {
                 """;
         assertThat(json.parse(content))
                 .usingRecursiveComparison()
-                .isEqualTo(new House("123456789", "Acme Fresh Start Housing",
+                .isEqualTo(House.of("123456789", "Acme Fresh Start Housing",
                         "Chicago",
                         "IL",
                         "https://angular.dev/assets/images/tutorials/common/b" +

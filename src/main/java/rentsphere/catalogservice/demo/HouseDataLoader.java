@@ -8,17 +8,20 @@ import org.springframework.stereotype.Component;
 import rentsphere.catalogservice.domain.House;
 import rentsphere.catalogservice.domain.HouseRepository;
 
+import java.util.List;
+
 @Component
 @Profile("testdata")
-public class BookDataLoader {
+public class HouseDataLoader {
     private final HouseRepository houseRepository;
-    public BookDataLoader(HouseRepository houseRepository) {
+    public HouseDataLoader(HouseRepository houseRepository) {
         this.houseRepository = houseRepository;
     }
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadHouseTestData() {
-        var house1 = new House("123456789", "Acme Fresh Start Housing",
+        houseRepository.deleteAll();
+        var house1 = House.of("123456789", "Acme Fresh Start Housing",
                 "Chicago",
                 "IL",
                 "https://angular.dev/assets/images/tutorials/common/b" +
@@ -27,7 +30,7 @@ public class BookDataLoader {
                 true,
                 true
         );
-        var house2 = new House("223456789", "A113 Transitional Housing",
+        var house2 = House.of("223456789", "A113 Transitional Housing",
                 "Santa Monica",
                 "CA",
                 "https://angular.dev/assets/images/tutorials/common/brandon-griggs-" +
@@ -36,7 +39,6 @@ public class BookDataLoader {
                 false,
                 true
         );
-        houseRepository.save(house1);
-        houseRepository.save(house2);
+        houseRepository.saveAll(List.of(house1, house2));
     }
 }

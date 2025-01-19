@@ -20,8 +20,8 @@ public class HouseService {
     }
 
     public House addHouseToCatalog(House house) {
-        if (houseRepository.existsByCode(house.houseCode())) {
-            throw new HouseAlreadyExistsException(house.houseCode());
+        if (houseRepository.existsByCode(house.code())) {
+            throw new HouseAlreadyExistsException(house.code());
         }
         return houseRepository.save(house);
     }
@@ -37,14 +37,18 @@ public class HouseService {
         return houseRepository.findByCode(code)
                 .map(existingHouse -> {
                     var houseToUpdate = new House(
-                            existingHouse.houseCode(),
+                            existingHouse.id(),
+                            existingHouse.code(),
                             house.name(),
                             house.city(),
                             house.state(),
                             house.photo(),
                             house.availableUnits(),
                             house.wifi(),
-                            house.laundry());
+                            house.laundry(),
+                            existingHouse.createdDate(),
+                            existingHouse.lastModifiedDate(),
+                            existingHouse.version());
                     return  houseRepository.save(houseToUpdate);
                 }).orElseThrow(() -> new HouseNotFoundException(code));
     }

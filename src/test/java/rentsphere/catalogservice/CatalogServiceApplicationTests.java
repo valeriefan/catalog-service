@@ -3,12 +3,14 @@ package rentsphere.catalogservice;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import rentsphere.catalogservice.domain.House;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@ActiveProfiles("integration")
 class CatalogServiceApplicationTests {
 
     @Autowired
@@ -17,7 +19,7 @@ class CatalogServiceApplicationTests {
     @Test
     void whenGetRequestWithIdThenHouseReturned() {
         var code = "123456789";
-        var houseToCreate = new House(code, "Acme Fresh Start Housing",
+        var houseToCreate = House.of(code, "Acme Fresh Start Housing",
                 "Chicago",
                 "IL",
                 "https://angular.dev/assets/images/tutorials/common/b" +
@@ -43,13 +45,13 @@ class CatalogServiceApplicationTests {
                 .expectBody(House.class).value(actualBook -> {
                     assertThat(actualBook).isNotNull();
                     assert expectedHouse != null;
-                    assertThat(actualBook.houseCode()).isEqualTo(expectedHouse.houseCode());
+                    assertThat(actualBook.code()).isEqualTo(expectedHouse.code());
                 });
     }
 
     @Test
     void whenPostRequestThenHouseCreated() {
-        var expectedHouse = new House("223456789", "Acme Fresh Start Housing",
+        var expectedHouse = House.of("223456789", "Acme Fresh Start Housing",
                 "Chicago",
                 "IL",
                 "https://angular.dev/assets/images/tutorials/common/bernard-hermant-CLKGGwIBTaY-unsplash.jpg",
@@ -66,14 +68,14 @@ class CatalogServiceApplicationTests {
                 .expectStatus().isCreated()
                 .expectBody(House.class).value(actualBook -> {
                     assertThat(actualBook).isNotNull();
-                    assertThat(actualBook.houseCode()).isEqualTo(expectedHouse.houseCode());
+                    assertThat(actualBook.code()).isEqualTo(expectedHouse.code());
                 });
     }
 
     @Test
     void whenPutRequestThenHouseUpdated() {
         var code = "323456789";
-        var houseToCreate = new House(code, "Acme Fresh Start Housing",
+        var houseToCreate = House.of(code, "Acme Fresh Start Housing",
                 "Chicago",
                 "IL",
                 "https://angular.dev/assets/images/tutorials/common/b" +
@@ -91,8 +93,8 @@ class CatalogServiceApplicationTests {
                 .expectBody(House.class).value(book -> assertThat(book).isNotNull())
                 .returnResult().getResponseBody();
         assert createdHouse != null;
-        var bookToUpdate = new House(
-                createdHouse.houseCode(),
+        var bookToUpdate = House.of(
+                createdHouse.code(),
                 createdHouse.name(),
                 createdHouse.city(),
                 createdHouse.state(),
@@ -117,7 +119,7 @@ class CatalogServiceApplicationTests {
     @Test
     void whenDeleteRequestThenHouseDeleted() {
         var code = "423456789";
-        var houseToCreate = new House(code, "Acme Fresh Start Housing",
+        var houseToCreate = House.of(code, "Acme Fresh Start Housing",
                 "Chicago",
                 "IL",
                 "https://angular.dev/assets/images/tutorials/common/b" +
