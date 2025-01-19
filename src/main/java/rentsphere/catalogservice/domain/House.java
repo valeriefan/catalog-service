@@ -1,9 +1,6 @@
 package rentsphere.catalogservice.domain;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.*;
 
 public record House(
         @NotBlank(message = "The house reference code must be defined.")
@@ -26,7 +23,7 @@ public record House(
         String photo,
 
         @NotNull(message = "The available units must be defined.")
-        @Positive(message = "The available units must be greater than zero.")
+        @PositiveOrZero(message = "The available units must be greater than or equal to zero.")
         int availableUnits,
 
         @NotNull(message = "The availability of wifi must be defined.")

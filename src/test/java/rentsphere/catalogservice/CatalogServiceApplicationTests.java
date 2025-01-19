@@ -15,7 +15,7 @@ class CatalogServiceApplicationTests {
     private WebTestClient webTestClient;
 
     @Test
-    void whenGetRequestWithIdThenBookReturned() {
+    void whenGetRequestWithIdThenHouseReturned() {
         var code = "123456789";
         var houseToCreate = new House(code, "Acme Fresh Start Housing",
                 "Chicago",
@@ -48,7 +48,7 @@ class CatalogServiceApplicationTests {
     }
 
     @Test
-    void whenPostRequestThenBookCreated() {
+    void whenPostRequestThenHouseCreated() {
         var expectedHouse = new House("223456789", "Acme Fresh Start Housing",
                 "Chicago",
                 "IL",
@@ -71,7 +71,7 @@ class CatalogServiceApplicationTests {
     }
 
     @Test
-    void whenPutRequestThenBookUpdated() {
+    void whenPutRequestThenHouseUpdated() {
         var code = "323456789";
         var houseToCreate = new House(code, "Acme Fresh Start Housing",
                 "Chicago",
@@ -115,7 +115,7 @@ class CatalogServiceApplicationTests {
     }
 
     @Test
-    void whenDeleteRequestThenBookDeleted() {
+    void whenDeleteRequestThenHouseDeleted() {
         var code = "423456789";
         var houseToCreate = new House(code, "Acme Fresh Start Housing",
                 "Chicago",

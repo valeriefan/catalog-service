@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class BookValidationTests {
+public class HouseValidationTests {
     private static Validator validator;
 
     @BeforeAll
@@ -162,7 +162,7 @@ public class BookValidationTests {
         Set<ConstraintViolation<House>> violations = validator.validate(house);
         assertThat(violations).hasSize(1);
         assertThat(violations.iterator().next().getMessage())
-                .isEqualTo("The available units must be greater than zero.");
+                .isEqualTo("The available units must be greater than or equal to zero.");
     }
 
 }
