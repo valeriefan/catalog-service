@@ -1,22 +1,20 @@
 # Catalog Service
 
-This application is part of the Polar Bookshop system and provides the functionality for managing
-the books in the bookshop catalog. It's part of the project built in the
-[Cloud Native Spring in Action](https://www.manning.com/books/cloud-native-spring-in-action) book
-by [Thomas Vitale](https://www.thomasvitale.com).
+This application is part of the RentSphere system and provides the functionality for managing
+the houses in the catalog.
 
 ## REST API
 
-| Endpoint	      | Method   | Req. body  | Status | Resp. body     | Description    		   	     |
-|:---------------:|:--------:|:----------:|:------:|:--------------:|:-------------------------------|
-| `/books`        | `GET`    |            | 200    | Book[]         | Get all the books in the catalog. |
-| `/books`        | `POST`   | Book       | 201    | Book           | Add a new book to the catalog. |
-|                 |          |            | 422    |                | A book with the same ISBN already exists. |
-| `/books/{isbn}` | `GET`    |            | 200    | Book           | Get the book with the given ISBN. |
-|                 |          |            | 404    |                | No book with the given ISBN exists. |
-| `/books/{isbn}` | `PUT`    | Book       | 200    | Book           | Update the book with the given ISBN. |
-|                 |          |            | 200    | Book           | Create a book with the given ISBN. |
-| `/books/{isbn}` | `DELETE` |            | 204    |                | Delete the book with the given ISBN. |
+|    Endpoint	     | Method   | Req. body | Status | Resp. body | Description    		   	                      |
+|:----------------:|:--------:|:---------:|:------:|:----------:|:-------------------------------------------|
+|    `/houses`     | `GET`    |           | 200    |  House[]   | Get all the houses in the catalog.         |
+|    `/houses`     | `POST`   |   House   | 201    |    House    | Add a new house to the catalog.            |
+|                  |          |           | 422    |            | A house with the same code already exists. |
+| `/houses/{code}` | `GET`    |           | 200    |    House    | Get the house with the given code.         |
+|                  |          |           | 404    |            | No house with the given code exists.       |
+| `/houses/{code}` | `PUT`    |   House    | 200    |    House    | Update the house with the given code.       |
+|                  |          |           | 200    |    House    | Create a house with the given code.         |
+| `/houses/{code}` | `DELETE` |           | 204    |            | Delete the house with the given code.       |
 
 ## Useful Commands
 
