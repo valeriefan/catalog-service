@@ -1,10 +1,7 @@
 package rentsphere.catalogservice.domain;
 
 import jakarta.validation.constraints.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.annotation.Version;
+import org.springframework.data.annotation.*;
 
 import java.time.Instant;
 
@@ -48,6 +45,12 @@ public record House(
         @LastModifiedDate
         Instant lastModifiedDate,
 
+        @CreatedBy
+        String createdBy,
+
+        @LastModifiedBy
+        String lastModifiedBy,
+
         @Version
         int version
 ) {
@@ -57,7 +60,8 @@ public record House(
         ) {
                 return new House(
                         null, code, name, city, state, photo,
-                        availableUnits, wifi, laundry, null, null, 0
+                        availableUnits, wifi, laundry, null, null,
+                        null, null, 0
                 );
         }
 }

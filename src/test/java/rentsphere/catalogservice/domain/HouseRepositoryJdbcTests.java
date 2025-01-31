@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jdbc.core.JdbcAggregateTemplate;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import rentsphere.catalogservice.config.DataConfig;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -125,5 +126,44 @@ public class HouseRepositoryJdbcTests {
         houseRepository.deleteByCode(code);
 
         assertThat(jdbcAggregateTemplate.findById(persistedHouse.id(), House.class)).isNull();
+    }
+
+    @Test
+    void whenCreateBookNotAuthenticatedThenNoAuditMetadata() {
+        var code = "523456789";
+        var houseToCreate = House.of(code, "Acme Fresh Start Housing",
+                "Chicago",
+                "IL",
+                "https://angular.dev/assets/images/tutorials/common/b" +
+                        "ernard-hermant-CLKGGwIBTaY-unsplash.jpg",
+                4,
+                true,
+                true
+        );
+        var createdHouse = houseRepository.save(houseToCreate);
+
+        assertThat(createdHouse.createdBy()).isNull();
+        assertThat(createdHouse.lastModifiedBy()).isNull();
+    }
+
+    @Test
+    @WithMockUser("john")
+    void whenCreateBookAuthenticatedThenAuditMetadata() {
+        var code = "523456789";
+        var houseToCreate = House.of(code, "Acme Fresh Start Housing",
+                "Chicago",
+                "IL",
+                "https://angular.dev/assets/images/tutorials/common/b" +
+                        "ernard-hermant-CLKGGwIBTaY-unsplash.jpg",
+                4,
+                true,
+                true
+        );
+        var createdHouse = houseRepository.save(houseToCreate);
+
+        assertThat(createdHouse.createdBy())
+                .isEqualTo("john");
+        assertThat(createdHouse.lastModifiedBy())
+                .isEqualTo("john");
     }
 }

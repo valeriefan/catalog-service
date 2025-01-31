@@ -191,6 +191,8 @@ class CatalogServiceApplicationTests {
                 createdHouse.laundry(),
                 createdHouse.createdDate(),
                 createdHouse.lastModifiedDate(),
+                createdHouse.createdBy(),
+                createdHouse.lastModifiedBy(),
                 createdHouse.version());
 
         webTestClient

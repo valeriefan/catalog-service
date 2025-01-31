@@ -48,6 +48,8 @@ public class HouseService {
                             house.laundry(),
                             existingHouse.createdDate(),
                             existingHouse.lastModifiedDate(),
+                            existingHouse.createdBy(),
+                            existingHouse.lastModifiedBy(),
                             existingHouse.version());
                     return  houseRepository.save(houseToUpdate);
                 }).orElseThrow(() -> new HouseNotFoundException(code));
