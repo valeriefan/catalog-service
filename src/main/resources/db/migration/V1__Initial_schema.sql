@@ -5,7 +5,7 @@ CREATE TABLE house (
                        city                varchar(255) NOT NULL,
                        state               varchar(255) NOT NULL,
                        photo               varchar(255) NOT NULL,
-                       available_units      integer NOT NULL,
+                       available_units     integer NOT NULL,
                        wifi                BOOL NOT NULL,
                        laundry             BOOL NOT NULL,
                        created_date        timestamp NOT NULL,
