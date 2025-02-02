@@ -19,6 +19,7 @@ repositories {
 
 ext {
     set('testKeycloakVersion', "2.3.0")
+    set('otelVersion', "1.33.0")
 }
 
 dependencies {
@@ -38,6 +39,8 @@ dependencies {
     testImplementation 'org.springframework.security:spring-security-test'
     testImplementation 'org.testcontainers:junit-jupiter'
     testImplementation "com.github.dasniko:testcontainers-keycloak:${testKeycloakVersion}"
+    runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+    runtimeOnly "io.opentelemetry.javaagent:opentelemetry-javaagent:${otelVersion}"
 }
 
 tasks.named('test') {
@@ -60,4 +63,8 @@ bootBuildImage {
             url = project.findProperty("registryUrl")
         }
     }
+}
+
+springBoot {
+    buildInfo()
 }

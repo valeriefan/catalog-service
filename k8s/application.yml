@@ -1,0 +1,10 @@
+rentsphere:
+  greeting: Welcome to the house catalog from Kubernetes environment!
+spring:
+  datasource:
+    url: jdbc:postgresql://rentsphere-postgres/rentspheredb_catalog
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://rentsphere-keycloak/realms/RentSphere
