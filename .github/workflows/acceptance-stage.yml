@@ -7,10 +7,10 @@ on:
 concurrency: acceptance
 
 env:
-  OWNER: polarbookshop
+  OWNER: valeriefan
   REGISTRY: ghcr.io
   APP_REPO: catalog-service
-  DEPLOY_REPO: polar-deployment
+  DEPLOY_REPO: rentsphere-deployment
   VERSION: ${{ github.sha }}
 
 jobs:
